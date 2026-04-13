@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Два пончика и чашка кофе</title>
+  <meta
+    name="description"
+    content="Современная лендинг-страница специализированной кофейни «Два пончика и чашка кофе» с историей, меню и контактами."
+  >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap"
+    rel="stylesheet"
+  >
+  <style>
+    :root {
+      --bg: #f6efe6;
+      --bg-soft: #efe0cc;
+      --surface: rgba(255, 255, 255, 0.58);
+      --surface-strong: rgba(255, 250, 244, 0.88);
+      --surface-dark: rgba(74, 42, 25, 0.9);
+      --text: #2f1d12;
+      --muted: #715846;
+      --accent: #8f5435;
+      --accent-strong: #6b381f;
+      --accent-soft: #d4a277;
+      --accent-glow: rgba(178, 118, 80, 0.22);
+      --line: rgba(94, 58, 35, 0.11);
+      --line-strong: rgba(94, 58, 35, 0.18);
+      --shadow: 0 30px 70px rgba(63, 36, 21, 0.12);
+      --shadow-soft: 0 16px 34px rgba(63, 36, 21, 0.08);
+      --radius-2xl: 40px;
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 18px;
+      --container: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 108px;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Outfit", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(223, 187, 144, 0.26), transparent 26%),
+        radial-gradient(circle at 82% 12%, rgba(164, 108, 74, 0.16), transparent 24%),
+        radial-gradient(circle at 50% 100%, rgba(230, 210, 184, 0.22), transparent 34%),
+        linear-gradient(180deg, #fffcf7 0%, #f7efe6 46%, #f2e5d6 100%);
+      line-height: 1.55;
+      min-width: 320px;
+      letter-spacing: -0.01em;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.6), transparent 75%);
+      opacity: 0.28;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: auto auto -180px -140px;
+      width: 460px;
+      height: 460px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212, 162, 119, 0.12), transparent 68%);
+      pointer-events: none;
+      filter: blur(10px);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .container {
+      width: min(calc(100% - 40px), var(--container));
+      margin: 0 auto;
+    }
+
+    .ambient-orb {
+      position: fixed;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 50%;
+      filter: blur(10px);
+      opacity: 0.6;
+      animation: float-orb 16s ease-in-out infinite;
+    }
+
+    .ambient-orb.one {
+      top: 110px;
+      right: -120px;
+      width: 320px;
+      height: 320px;
+      background: radial-gradient(circle, rgba(212, 162, 119, 0.18), transparent 70%);
+    }
+
+    .ambient-orb.two {
+      bottom: 8%;
+      left: -100px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(143, 84, 53, 0.1), transparent 72%);
+      animation-delay: -6s;
+    }
+
+    .section {
+      padding: 96px 0;
+      position: relative;
+    }
+
+    .section-title {
+      margin: 0 0 16px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      text-wrap: balance;
+    }
+
+    .section-lead {
+      margin: 0;
+      max-width: 640px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(139, 75, 45, 0.12);
+      background: rgba(255, 252, 248, 0.62);
+      color: var(--accent-strong);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      backdrop-filter: blur(18px);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e8b37a, var(--accent));
+      box-shadow: 0 0 0 5px rgba(199, 143, 103, 0.18);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 18px 0 14px;
+      backdrop-filter: blur(22px) saturate(1.15);
+      background: linear-gradient(180deg, rgba(248, 241, 233, 0.86), rgba(248, 241, 233, 0.48));
+      border-bottom: 1px solid rgba(109, 52, 29, 0.06);
+    }
+
+    .site-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+    }
+
+    .brand-mark {
+      width: 50px;
+      height: 50px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      font-size: 1.42rem;
+      color: #fff9f2;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.18), transparent),
+        linear-gradient(135deg, #9b5f3d 0%, #744029 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.28),
+        0 18px 36px rgba(109, 52, 29, 0.18);
+    }
+
+    .brand-text {
+      display: grid;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 1.02rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.46);
+      border: 1px solid rgba(109, 52, 29, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav a {
+      position: relative;
+      padding: 10px 16px;
+      border-radius: 999px;
+      font-weight: 600;
+      color: var(--muted);
+      transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--accent-strong);
+      background: rgba(255, 255, 255, 0.84);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(77, 40, 23, 0.08);
+      outline: none;
+    }
+
+    .hero {
+      padding: 38px 0 96px;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 34px;
+      align-items: center;
+      padding: 36px;
+      border-radius: var(--radius-2xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.52), rgba(255, 248, 239, 0.38)),
+        radial-gradient(circle at top right, rgba(212, 162, 119, 0.14), transparent 36%);
+      border: 1px solid rgba(109, 52, 29, 0.09);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.75),
+        0 28px 70px rgba(77, 40, 23, 0.08);
+      backdrop-filter: blur(18px);
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-copy {
+      animation: rise-up 0.8s ease both;
+    }
+
+    .hero-title {
+      margin: 0 0 20px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(3.5rem, 8vw, 6.4rem);
+      line-height: 0.87;
+      letter-spacing: -0.06em;
+      text-wrap: balance;
+    }
+
+    .hero-title span {
+      display: block;
+      color: var(--accent);
+      text-shadow: 0 10px 30px rgba(143, 84, 53, 0.08);
+    }
+
+    .hero-text {
+      max-width: 620px;
+      margin: 0 0 34px;
+      font-size: 1.08rem;
+      color: var(--muted);
+      text-wrap: pretty;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 0 26px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease, border-color 0.28s ease, filter 0.28s ease;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .button::after {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 -35%;
+      width: 30%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.38), transparent);
+      transform: skewX(-22deg);
+      transition: transform 0.7s ease;
+    }
+
+    .button-primary {
+      color: #fff7ef;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent),
+        linear-gradient(135deg, var(--accent-strong) 0%, var(--accent) 100%);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        0 18px 34px rgba(109, 52, 29, 0.2);
+      animation: pulse-glow 4.8s ease-in-out infinite;
+    }
+
+    .button-primary:hover,
+    .button-primary:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: 0 24px 42px rgba(109, 52, 29, 0.24);
+      filter: saturate(1.08);
+      outline: none;
+    }
+
+    .button:hover::after,
+    .button:focus-visible::after {
+      transform: translateX(420%) skewX(-22deg);
+    }
+
+    .button-secondary {
+      border-color: rgba(139, 75, 45, 0.12);
+      background: rgba(255, 255, 255, 0.68);
+      color: var(--accent-strong);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+    }
+
+    .button-secondary:hover,
+    .button-secondary:focus-visible {
+      transform: translateY(-3px);
+      border-color: rgba(139, 75, 45, 0.22);
+      background: #fff;
+      box-shadow: 0 16px 28px rgba(77, 40, 23, 0.08);
+      outline: none;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .stat-card {
+      padding: 20px 20px 18px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.54);
+      border: 1px solid rgba(139, 75, 45, 0.08);
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(16px);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 38px rgba(82, 48, 26, 0.1);
+    }
+
+    .stat-value {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.52rem;
+      font-weight: 800;
+      color: var(--accent-strong);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 640px;
+      animation: fade-in 0.95s ease both 0.12s;
+      perspective: 1400px;
+      z-index: 1;
+    }
+
+    .visual-card {
+      position: absolute;
+      border-radius: 34px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(139, 75, 45, 0.08);
+    }
+
+    .visual-main {
+      inset: 52px 34px 84px 76px;
+      padding: 34px;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.62), transparent 34%),
+        linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(239, 220, 195, 0.96)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23cda482' stroke-opacity='.35'%3E%3Cpath d='M49 57c18-17 50-16 67 2 17 18 16 47-1 64-18 17-51 16-68-2s-15-47 2-64Z'/%3E%3Cpath d='M122 97c10-9 27-9 36 1 10 10 10 26 0 36-9 9-26 10-36 0-10-9-10-27 0-37Z'/%3E%3C/g%3E%3C/svg%3E")
+          center/cover;
+      transform:
+        translate3d(0, 0, 0)
+        rotateX(var(--tilt-x, 0deg))
+        rotateY(var(--tilt-y, 0deg));
+      transition: transform 0.35s ease;
+    }
+
+    .visual-main::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      pointer-events: none;
+    }
+
+    .visual-main::after {
+      content: "";
+      position: absolute;
+      inset: auto 42px 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(107, 56, 31, 0.16), transparent 70%);
+      filter: blur(10px);
+    }
+
+    .hero-shot {
+      position: relative;
+      width: min(100%, 500px);
+      transform: translateY(6px);
+      animation: float-cup 6.5s ease-in-out infinite;
+    }
+
+    .hero-shot svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: visible;
+      filter: drop-shadow(0 34px 54px rgba(88, 48, 28, 0.16));
+    }
+
+    .hero-shot .steam-line {
+      animation: steam-draw 5.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .hero-shot .donut-left,
+    .hero-shot .donut-right {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+
+    .hero-shot .donut-left {
+      animation: donut-rock-left 8s ease-in-out infinite;
+    }
+
+    .hero-shot .donut-right {
+      animation: donut-rock-right 7.2s ease-in-out infinite;
+    }
+
+    .hero-shot .specular {
+      animation: shimmer 6s ease-in-out infinite;
+    }
+
+    .label-card,
+    .note-card {
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 18px 32px rgba(72, 39, 23, 0.1);
+    }
+
+    .label-card {
+      top: 10px;
+      right: 10px;
+      width: 220px;
+      animation: float-card 5.5s ease-in-out infinite;
+    }
+
+    .note-card {
+      left: 0;
+      bottom: 20px;
+      width: 240px;
+      animation: float-card 6.2s ease-in-out infinite reverse;
+    }
+
+    .floating-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .floating-kicker::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .floating-text {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .panel {
+      height: 100%;
+      padding: 34px;
+      border-radius: var(--radius-2xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.64), rgba(251, 242, 230, 0.82)),
+        radial-gradient(circle at top right, rgba(212, 162, 119, 0.12), transparent 34%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .panel:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 34px 76px rgba(63, 36, 21, 0.14);
+    }
+
+    .story-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -70px auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199, 143, 103, 0.28), transparent 70%);
+    }
+
+    .story-copy p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      max-width: 58ch;
+    }
+
+    .story-copy p:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.56);
+      border: 1px solid rgba(139, 75, 45, 0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease, background-color 0.28s ease, border-color 0.28s ease;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 40px rgba(82, 48, 26, 0.1);
+      background: rgba(255, 255, 255, 0.74);
+      border-color: rgba(139, 75, 45, 0.14);
+    }
+
+    .info-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.16rem;
+    }
+
+    .info-card h3,
+    .menu-card h3,
+    .contact-value strong {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .menu-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 38px;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    .menu-card {
+      position: relative;
+      padding: 26px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(245, 233, 216, 0.94)),
+        radial-gradient(circle at top right, rgba(212, 162, 119, 0.12), transparent 36%);
+      border: 1px solid rgba(139, 75, 45, 0.08);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .menu-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(139, 75, 45, 0.14);
+      box-shadow: 0 28px 48px rgba(82, 48, 26, 0.14);
+    }
+
+    .menu-card:hover .drink-icon {
+      transform: translateY(-4px) scale(1.04);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.88),
+        0 18px 28px rgba(77, 40, 23, 0.12);
+    }
+
+    .menu-card:hover h3 {
+      transform: translateY(-2px);
+      color: var(--accent-strong);
+    }
+
+    .menu-card::before {
+      content: "";
+      position: absolute;
+      inset: auto -16px -20px auto;
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(199, 143, 103, 0.26), transparent 72%);
+    }
+
+    .menu-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      pointer-events: none;
+    }
+
+    .drink-icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 24px;
+      font-size: 1.9rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 247, 237, 0.42));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.88),
+        0 12px 20px rgba(77, 40, 23, 0.08);
+      transition: transform 0.32s ease, box-shadow 0.32s ease;
+    }
+
+    .menu-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.22rem;
+      line-height: 1.15;
+    }
+
+    .menu-card p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .drink-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .price {
+      font-size: 1.14rem;
+      font-weight: 800;
+      color: var(--accent-strong);
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(139, 75, 45, 0.08);
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 34px;
+      border-radius: var(--radius-2xl);
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.1), transparent 36%),
+        linear-gradient(180deg, rgba(108, 56, 31, 0.98), rgba(73, 38, 22, 0.96));
+      color: #fff8f0;
+      box-shadow: 0 28px 56px rgba(78, 42, 24, 0.22);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .contact-card .section-title,
+    .contact-card .section-lead {
+      color: inherit;
+    }
+
+    .contact-card .section-lead {
+      opacity: 0.8;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .contact-item {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s ease, background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-4px);
+      background: rgba(255, 255, 255, 0.11);
+      border-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .contact-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.72;
+    }
+
+    .contact-value {
+      margin: 0;
+      font-size: 1.03rem;
+      line-height: 1.5;
+    }
+
+    .map-panel {
+      position: relative;
+      display: grid;
+      gap: 18px;
+      padding: 34px;
+      border-radius: var(--radius-2xl);
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(246, 235, 220, 0.92)),
+        radial-gradient(circle at top right, rgba(212, 162, 119, 0.12), transparent 34%);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .map-panel::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(139, 75, 45, 0.12);
+      pointer-events: none;
+    }
+
+    .map-art {
+      position: relative;
+      min-height: 280px;
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255, 243, 226, 0.9), rgba(233, 204, 165, 0.75)),
+        repeating-linear-gradient(
+          0deg,
+          rgba(139, 75, 45, 0.08) 0 2px,
+          transparent 2px 50px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgba(139, 75, 45, 0.08) 0 2px,
+          transparent 2px 50px
+        );
+    }
+
+    .map-road {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 999px;
+      box-shadow: inset 0 0 0 1px rgba(139, 75, 45, 0.06);
+    }
+
+    .map-road.one {
+      width: 84%;
+      height: 18px;
+      top: 64px;
+      left: 8%;
+      transform: rotate(-7deg);
+    }
+
+    .map-road.two {
+      width: 18px;
+      height: 82%;
+      top: 9%;
+      left: 58%;
+      transform: rotate(6deg);
+    }
+
+    .map-road.three {
+      width: 62%;
+      height: 14px;
+      bottom: 72px;
+      left: 16%;
+      transform: rotate(9deg);
+    }
+
+    .pin {
+      position: absolute;
+      top: 44%;
+      left: 55%;
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      border-radius: 50% 50% 50% 0;
+      transform: translate(-50%, -50%) rotate(-45deg);
+      background: linear-gradient(135deg, #c76f47, var(--accent-strong));
+      box-shadow: 0 24px 34px rgba(109, 52, 29, 0.26);
+      animation: bob 3.2s ease-in-out infinite;
+    }
+
+    .pin::before {
+      content: "☕";
+      font-size: 1.45rem;
+      transform: rotate(45deg);
+    }
+
+    .map-note {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(139, 75, 45, 0.08);
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .map-note:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 34px rgba(77, 40, 23, 0.1);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px) scale(0.985);
+      transition:
+        opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      transition-delay: calc(var(--delay, 0) * 90ms);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .map-note strong {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .map-note span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .site-footer {
+      padding: 0 0 38px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .site-footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 22px;
+      border-top: 1px solid rgba(109, 52, 29, 0.1);
+    }
+
+    @keyframes rise-up {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse-glow {
+      0%,
+      100% {
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.16),
+          0 18px 34px rgba(109, 52, 29, 0.2);
+      }
+      50% {
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.16),
+          0 24px 44px rgba(109, 52, 29, 0.26),
+          0 0 0 10px rgba(178, 118, 80, 0.08);
+      }
+    }
+
+    @keyframes float-cup {
+      0%,
+      100% {
+        transform: translateY(6px);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    @keyframes float-card {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes float-orb {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+      50% {
+        transform: translate3d(-12px, 18px, 0);
+      }
+    }
+
+    @keyframes drift {
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(-16px);
+      }
+    }
+
+    @keyframes steam-draw {
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: translateY(6px);
+      }
+      50% {
+        opacity: 0.85;
+        transform: translateY(-10px);
+      }
+    }
+
+    @keyframes bob {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      50% {
+        transform: translate(-50%, -56%) rotate(-45deg);
+      }
+    }
+
+    @keyframes donut-rock-left {
+      0%,
+      100% {
+        transform: rotate(-6deg) translateY(0);
+      }
+      50% {
+        transform: rotate(-2deg) translateY(-4px);
+      }
+    }
+
+    @keyframes donut-rock-right {
+      0%,
+      100% {
+        transform: rotate(8deg) translateY(0);
+      }
+      50% {
+        transform: rotate(12deg) translateY(-5px);
+      }
+    }
+
+    @keyframes shimmer {
+      0%,
+      100% {
+        opacity: 0.45;
+      }
+      50% {
+        opacity: 0.9;
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .about-layout,
+      .contact-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .hero-visual {
+        min-height: 560px;
+      }
+
+      .visual-main {
+        inset: 40px 30px 60px 50px;
+      }
+
+      .menu-header {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .site-header {
+        padding: 14px 0;
+      }
+
+      .site-header .container,
+      .site-footer .container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        border-radius: 24px;
+      }
+
+      .hero {
+        padding-top: 22px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .hero-grid {
+        padding: 26px;
+      }
+
+      .hero-title {
+        max-width: 10ch;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-stats,
+      .about-grid,
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .panel,
+      .contact-card,
+      .map-panel {
+        padding: 24px;
+      }
+
+      .hero-visual {
+        min-height: 440px;
+      }
+
+      .ambient-orb {
+        opacity: 0.38;
+      }
+
+      .visual-main {
+        inset: 44px 10px 70px 10px;
+        padding: 22px;
+      }
+
+      .label-card {
+        width: 200px;
+      }
+
+      .note-card {
+        width: 210px;
+      }
+
+      .hero-shot {
+        width: min(100%, 430px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        width: min(calc(100% - 24px), var(--container));
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        font-size: 1.25rem;
+      }
+
+      .nav a {
+        padding: 8px 10px;
+        font-size: 0.94rem;
+      }
+
+      .hero-visual {
+        min-height: 380px;
+      }
+
+      .visual-main {
+        inset: 52px 0 64px;
+      }
+
+      .label-card,
+      .note-card {
+        position: static;
+        width: 100%;
+      }
+
+      .visual-main {
+        display: grid;
+        align-content: end;
+        gap: 12px;
+      }
+
+      .hero-shot {
+        width: min(100%, 360px);
+      }
+
+      .map-note {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-grid,
+      .panel,
+      .contact-card,
+      .map-panel {
+        border-radius: 28px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-orb one" aria-hidden="true"></div>
+  <div class="ambient-orb two" aria-hidden="true"></div>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="#hero" aria-label="Два пончика и чашка кофе">
+        <span class="brand-mark">☕</span>
+        <span class="brand-text">
+          <span class="brand-title">Два пончика и чашка кофе</span>
+          <span class="brand-subtitle">Specialty Coffee & Donuts</span>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#about">О нас</a>
+        <a href="#menu">Меню</a>
+        <a href="#contact">Контакты</a>
+        <a href="#contact">Забронировать столик</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal is-visible">
+          <span class="eyebrow">Кофейня с характером</span>
+          <h1 class="hero-title">
+            Два пончика.
+            <span>Одна идеальная чашка.</span>
+          </h1>
+          <p class="hero-text">
+            Варим зерно с точностью до секунды, подбираем пончики под профиль вкуса и превращаем обычную паузу
+            в тёплый городской ритуал.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button button-primary" href="#menu">Посмотреть фирменное меню</a>
+            <a class="button button-secondary" href="#contact">Найти нас сегодня</a>
+          </div>
+
+          <div class="hero-stats">
+            <article class="stat-card reveal is-visible" style="--delay: 1;">
+              <span class="stat-value">7 лет</span>
+              <span class="stat-label">делаем кофе вручную</span>
+            </article>
+            <article class="stat-card reveal is-visible" style="--delay: 2;">
+              <span class="stat-value">12</span>
+              <span class="stat-label">авторских сочетаний</span>
+            </article>
+            <article class="stat-card reveal is-visible" style="--delay: 3;">
+              <span class="stat-value">08:00–22:00</span>
+              <span class="stat-label">ежедневно для гостей</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal is-visible" aria-hidden="true">
+          <div class="visual-card visual-main">
+            <div class="hero-shot">
+              <svg viewBox="0 0 640 640" role="presentation" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <radialGradient id="tableGlow" cx="50%" cy="45%" r="50%">
+                    <stop offset="0%" stop-color="#fff7ef"/>
+                    <stop offset="100%" stop-color="#ebd0ad"/>
+                  </radialGradient>
+                  <linearGradient id="cupBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fffdfa"/>
+                    <stop offset="55%" stop-color="#f5e7d6"/>
+                    <stop offset="100%" stop-color="#e2c39d"/>
+                  </linearGradient>
+                  <linearGradient id="plateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fffefc"/>
+                    <stop offset="100%" stop-color="#ecd8bf"/>
+                  </linearGradient>
+                  <radialGradient id="coffeeGrad" cx="50%" cy="42%" r="56%">
+                    <stop offset="0%" stop-color="#875035"/>
+                    <stop offset="60%" stop-color="#5a2d1b"/>
+                    <stop offset="100%" stop-color="#412012"/>
+                  </radialGradient>
+                  <radialGradient id="foamGrad" cx="40%" cy="34%" r="56%">
+                    <stop offset="0%" stop-color="#fdf6ea"/>
+                    <stop offset="100%" stop-color="#ecd1af"/>
+                  </radialGradient>
+                  <linearGradient id="donutDough" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f2ca8d"/>
+                    <stop offset="100%" stop-color="#b26f3f"/>
+                  </linearGradient>
+                  <linearGradient id="glazePink" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#f9d3c6"/>
+                    <stop offset="100%" stop-color="#e89983"/>
+                  </linearGradient>
+                  <linearGradient id="glazeCream" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fff8ea"/>
+                    <stop offset="100%" stop-color="#f0d6ae"/>
+                  </linearGradient>
+                  <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
+                    <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#744029" flood-opacity="0.18"/>
+                  </filter>
+                  <filter id="smallShadow" x="-30%" y="-30%" width="160%" height="180%">
+                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#744029" flood-opacity="0.14"/>
+                  </filter>
+                </defs>
+
+                <ellipse cx="330" cy="518" rx="232" ry="76" fill="rgba(98,55,32,0.10)"/>
+                <ellipse cx="326" cy="474" rx="238" ry="96" fill="url(#tableGlow)" opacity="0.95"/>
+
+                <g class="steam-line" opacity="0.7">
+                  <path d="M298 126C282 105 287 78 307 60" stroke="rgba(255,255,255,0.72)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M336 120C322 98 328 73 346 54" stroke="rgba(255,255,255,0.62)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                  <path d="M374 130C360 108 368 82 386 65" stroke="rgba(255,255,255,0.56)" stroke-width="10" stroke-linecap="round" fill="none"/>
+                </g>
+
+                <g filter="url(#softShadow)">
+                  <ellipse cx="328" cy="392" rx="168" ry="46" fill="rgba(82,48,26,0.14)"/>
+                  <ellipse cx="328" cy="378" rx="170" ry="58" fill="url(#plateGrad)"/>
+                  <ellipse cx="328" cy="378" rx="126" ry="38" fill="rgba(236,216,191,0.72)"/>
+                </g>
+
+                <g filter="url(#softShadow)">
+                  <ellipse cx="320" cy="320" rx="122" ry="32" fill="rgba(82,48,26,0.14)"/>
+                  <path d="M214 224C214 204 228 190 248 190H392C412 190 426 204 426 224V320C426 374 381 418 320 418C259 418 214 374 214 320V224Z" fill="url(#cupBody)"/>
+                  <path d="M244 199H396C408 199 417 208 417 220V245H223V220C223 208 232 199 244 199Z" fill="rgba(255,255,255,0.88)"/>
+                  <ellipse cx="320" cy="220" rx="112" ry="34" fill="url(#coffeeGrad)"/>
+                  <ellipse cx="320" cy="220" rx="87" ry="24" fill="url(#foamGrad)"/>
+                  <path class="specular" d="M290 223C302 204 338 198 360 214C338 224 318 238 296 244C286 240 282 232 290 223Z" fill="rgba(255,255,255,0.38)"/>
+                  <path d="M415 236C459 238 484 264 484 300C484 337 459 361 425 362" fill="none" stroke="#f0ddc6" stroke-width="24" stroke-linecap="round"/>
+                  <path d="M423 246C455 248 470 268 470 298C470 327 455 345 431 348" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="8" stroke-linecap="round"/>
+                </g>
+
+                <g class="donut-left" filter="url(#smallShadow)">
+                  <ellipse cx="172" cy="398" rx="88" ry="34" fill="rgba(82,48,26,0.14)"/>
+                  <g transform="translate(172 370) rotate(-8)">
+                    <circle r="82" fill="url(#donutDough)"/>
+                    <circle r="34" fill="#f0dfcb"/>
+                    <path d="M-64-20C-50-54-12-72 26-64C56-58 78-38 78-10C78 22 58 42 34 54C4 70-38 70-60 50C-78 34-84 8-76-18C-72-30-68-20-64-20Z" fill="url(#glazePink)" opacity="0.96"/>
+                    <circle cx="-32" cy="-8" r="4.6" fill="#fff5ec"/>
+                    <circle cx="-6" cy="-32" r="4.2" fill="#fff5ec"/>
+                    <circle cx="28" cy="-18" r="4.4" fill="#fff5ec"/>
+                    <circle cx="44" cy="14" r="4.2" fill="#fff5ec"/>
+                    <circle cx="0" cy="32" r="4.4" fill="#fff5ec"/>
+                  </g>
+                </g>
+
+                <g class="donut-right" filter="url(#smallShadow)">
+                  <ellipse cx="478" cy="420" rx="86" ry="32" fill="rgba(82,48,26,0.13)"/>
+                  <g transform="translate(478 394) rotate(10)">
+                    <circle r="76" fill="url(#donutDough)"/>
+                    <circle r="28" fill="#eddac3"/>
+                    <path d="M-58-18C-46-48-12-66 22-60C52-54 70-36 70-10C70 18 54 36 32 48C4 62-34 62-54 44C-70 30-76 4-68-18Z" fill="url(#glazeCream)" opacity="0.98"/>
+                    <path d="M-18-24L-6-8L10-18L20-2L36-10" stroke="#c98746" stroke-width="6" stroke-linecap="round"/>
+                    <path d="M-28 18L-10 12L0 28L16 20L30 34" stroke="#c98746" stroke-width="6" stroke-linecap="round"/>
+                  </g>
+                </g>
+              </svg>
+            </div>
+          </div>
+
+          <div class="visual-card label-card">
+            <span class="floating-kicker">Фирменный сет</span>
+            <p class="floating-text">Эспрессо-тоник, пончик с солёной карамелью и тёплый свет по утрам.</p>
+          </div>
+
+          <div class="visual-card note-card">
+            <span class="floating-kicker">Сегодня в зерне</span>
+            <p class="floating-text">Бразилия, натуральная обработка. Во вкусе: фундук, какао, карамель.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container about-layout">
+        <article class="panel story-panel reveal" style="--delay: 0;">
+          <span class="eyebrow">Наша история</span>
+          <h2 class="section-title">Кофейня, которая началась с соседских завтраков</h2>
+          <div class="story-copy">
+            <p>
+              «Два пончика и чашка кофе» выросла из маленькой стойки с фильтр-кофе и домашней выпечкой. Мы начинали
+              с идеи собрать место, где аромат свежего зерна и тёплое тесто работают как лучший повод замедлиться.
+            </p>
+            <p>
+              Сегодня мы остаёмся специализированной кофейней: следим за происхождением зерна, варим на точных
+              рецептурах и каждый сезон собираем меню вокруг нескольких ярких сочетаний, которые хочется запомнить.
+            </p>
+            <p>
+              Для нас сервис — это не формальность, а атмосфера. Поэтому здесь одинаково хорошо зайти за быстрым
+              капучино по пути на работу или остаться на длинный разговор у окна.
+            </p>
+          </div>
+        </article>
+
+        <div class="about-grid">
+          <article class="info-card reveal" style="--delay: 1;">
+            <h3>Specialty-подход</h3>
+            <p>Работаем с отборным зерном и обжаркой под молочные и чёрные напитки, чтобы вкус был стабильным каждый день.</p>
+          </article>
+          <article class="info-card reveal" style="--delay: 2;">
+            <h3>Свежая выпечка</h3>
+            <p>Пончики готовятся небольшими партиями в течение дня, поэтому витрина всегда живая, а текстура остаётся воздушной.</p>
+          </article>
+          <article class="info-card reveal" style="--delay: 3;">
+            <h3>Городское место встречи</h3>
+            <p>Мы задуманы как уютная точка в ритме города: с мягким светом, спокойной музыкой и удобными столиками.</p>
+          </article>
+          <article class="info-card reveal" style="--delay: 4;">
+            <h3>Сезонные вкусы</h3>
+            <p>Обновляем подборку напитков под сезон и добавляем сочетания, которые усиливают вкус десертов, а не спорят с ним.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="menu">
+      <div class="container">
+        <div class="menu-header">
+          <div>
+            <span class="eyebrow">Превью меню</span>
+            <h2 class="section-title">Фирменные напитки, ради которых возвращаются</h2>
+          </div>
+          <p class="section-lead">
+            Шесть позиций, которые лучше всего рассказывают о нашем стиле: чистый вкус зерна, сливочная текстура,
+            сложные акценты и ровный баланс без лишнего шума.
+          </p>
+        </div>
+
+        <div class="menu-grid">
+          <article class="menu-card reveal" style="--delay: 0;">
+            <div class="drink-icon">☕</div>
+            <h3>Капучино «Крем-брюле»</h3>
+            <p>Нежный молочный напиток с натуральной карамельной сладостью и бархатной пеной.</p>
+            <div class="drink-meta">
+              <span class="price">290 ₽</span>
+              <span class="tag">Хит</span>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" style="--delay: 1;">
+            <div class="drink-icon">🧊</div>
+            <h3>Эспрессо-тоник с апельсином</h3>
+            <p>Яркая цитрусовая кислотность, тоник и холодный эспрессо для бодрого городского утра.</p>
+            <div class="drink-meta">
+              <span class="price">330 ₽</span>
+              <span class="tag">Сезон</span>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" style="--delay: 2;">
+            <div class="drink-icon">🍩</div>
+            <h3>Латте «Солёная карамель»</h3>
+            <p>Сбалансированный сладко-солёный профиль, который идеально сочетается с классическим пончиком.</p>
+            <div class="drink-meta">
+              <span class="price">340 ₽</span>
+              <span class="tag">Пара дня</span>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" style="--delay: 3;">
+            <div class="drink-icon">🍫</div>
+            <h3>Мокко с какао-нибсами</h3>
+            <p>Глубокий шоколадный вкус, насыщенный эспрессо и лёгкая текстура сливок сверху.</p>
+            <div class="drink-meta">
+              <span class="price">360 ₽</span>
+              <span class="tag">Авторский</span>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" style="--delay: 4;">
+            <div class="drink-icon">🌰</div>
+            <h3>Флэт уайт «Пралине»</h3>
+            <p>Плотное тело, ореховые ноты и сладкое послевкусие, собранное вокруг яркого эспрессо.</p>
+            <div class="drink-meta">
+              <span class="price">350 ₽</span>
+              <span class="tag">Новый</span>
+            </div>
+          </article>
+
+          <article class="menu-card reveal" style="--delay: 5;">
+            <div class="drink-icon">❄️</div>
+            <h3>Колд брю с ванильным кремом</h3>
+            <p>Холодная экстракция, шелковистый крем сверху и чистый вкус какао-бобов и тростникового сахара.</p>
+            <div class="drink-meta">
+              <span class="price">370 ₽</span>
+              <span class="tag">Лето</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container contact-layout">
+        <article class="contact-card reveal" style="--delay: 0;">
+          <span class="eyebrow">Контакты</span>
+          <h2 class="section-title">Заглядывайте за кофе, пончиками и хорошим темпом дня</h2>
+          <p class="section-lead">
+            Мы открыты с раннего утра до позднего вечера. Заходите на быстрый кофе с собой или оставайтесь на долгий
+            неспешный перерыв.
+          </p>
+
+          <div class="contact-list">
+            <div class="contact-item reveal" style="--delay: 1;">
+              <span class="contact-label">Часы работы</span>
+              <p class="contact-value">Ежедневно, 08:00–22:00</p>
+            </div>
+            <div class="contact-item reveal" style="--delay: 2;">
+              <span class="contact-label">Адрес</span>
+              <p class="contact-value">Москва, ул. Большая Дмитровка, 18, рядом с метро «Театральная»</p>
+            </div>
+            <div class="contact-item reveal" style="--delay: 3;">
+              <span class="contact-label">Связь</span>
+              <p class="contact-value">+7 (495) 555-24-24<br>hello@2donutscoffee.ru</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="map-panel reveal" style="--delay: 1;">
+          <span class="eyebrow">Где мы</span>
+          <div class="map-art" aria-hidden="true">
+            <div class="map-road one"></div>
+            <div class="map-road two"></div>
+            <div class="map-road three"></div>
+            <div class="pin"></div>
+          </div>
+          <div class="map-note">
+            <div>
+              <strong>Пять минут пешком от центра</strong>
+              <span>Удобно зайти утром, встретиться днём или захватить кофе перед вечерней прогулкой.</span>
+            </div>
+            <a class="button button-secondary" href="#hero">Наверх</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <span>© 2026 «Два пончика и чашка кофе»</span>
+      <span>Specialty coffee, тёплый свет и пончики, которые не задерживаются на витрине.</span>
+    </div>
+  </footer>
+  <script>
+    const revealItems = document.querySelectorAll(".reveal:not(.is-visible)");
+
+    if (revealItems.length) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      }, {
+        threshold: 0.18,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    }
+
+    const heroVisual = document.querySelector(".hero-visual");
+    const heroMain = document.querySelector(".visual-main");
+
+    if (heroVisual && heroMain && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      heroVisual.addEventListener("mousemove", (event) => {
+        const rect = heroVisual.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+        heroMain.style.setProperty("--tilt-x", `${-y * 6}deg`);
+        heroMain.style.setProperty("--tilt-y", `${x * 8}deg`);
+      });
+
+      heroVisual.addEventListener("mouseleave", () => {
+        heroMain.style.setProperty("--tilt-x", "0deg");
+        heroMain.style.setProperty("--tilt-y", "0deg");
+      });
+    }
+  </script>
+</body>
+</html>
