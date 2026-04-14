@@ -433,7 +433,7 @@
 
     .hero-visual {
       position: relative;
-      min-height: 640px;
+      min-height: 680px;
       animation: fade-in 0.95s ease both 0.12s;
       perspective: 1400px;
       z-index: 1;
@@ -449,14 +449,11 @@
 
     .visual-main {
       inset: 52px 34px 84px 76px;
-      padding: 34px;
-      display: grid;
-      place-items: center;
+      padding: 0;
+      display: block;
       background:
-        radial-gradient(circle at top, rgba(255, 255, 255, 0.62), transparent 34%),
-        linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(239, 220, 195, 0.96)),
-        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220' viewBox='0 0 220 220'%3E%3Cg fill='none' stroke='%23cda482' stroke-opacity='.35'%3E%3Cpath d='M49 57c18-17 50-16 67 2 17 18 16 47-1 64-18 17-51 16-68-2s-15-47 2-64Z'/%3E%3Cpath d='M122 97c10-9 27-9 36 1 10 10 10 26 0 36-9 9-26 10-36 0-10-9-10-27 0-37Z'/%3E%3C/g%3E%3C/svg%3E")
-          center/cover;
+        radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 34%),
+        linear-gradient(180deg, rgba(255, 252, 247, 0.24), rgba(239, 220, 195, 0.08));
       transform:
         translate3d(0, 0, 0)
         rotateX(var(--tilt-x, 0deg))
@@ -469,8 +466,9 @@
       position: absolute;
       inset: 16px;
       border-radius: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.64);
+      border: 1px solid rgba(255, 255, 255, 0.5);
       pointer-events: none;
+      z-index: 2;
     }
 
     .visual-main::after {
@@ -485,40 +483,105 @@
 
     .hero-shot {
       position: relative;
-      width: min(100%, 500px);
-      transform: translateY(6px);
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+      transform: translateY(0);
       animation: float-cup 6.5s ease-in-out infinite;
     }
 
-    .hero-shot svg {
+    .hero-shot img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
-      overflow: visible;
-      filter: drop-shadow(0 34px 54px rgba(88, 48, 28, 0.16));
+      object-fit: cover;
+      filter: saturate(1.08) contrast(1.03);
+      transform: scale(1.03);
+      transition: transform 0.7s ease, filter 0.7s ease;
     }
 
-    .hero-shot .steam-line {
-      animation: steam-draw 5.8s ease-in-out infinite;
-      transform-origin: center;
+    .hero-visual:hover .hero-shot img {
+      transform: scale(1.08);
+      filter: saturate(1.14) contrast(1.05);
     }
 
-    .hero-shot .donut-left,
-    .hero-shot .donut-right {
-      transform-box: fill-box;
-      transform-origin: center;
+    .hero-shot::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(41, 21, 11, 0.02) 0%, rgba(41, 21, 11, 0.18) 42%, rgba(41, 21, 11, 0.62) 100%),
+        linear-gradient(120deg, rgba(255, 255, 255, 0.28) 0%, transparent 32%),
+        radial-gradient(circle at 18% 20%, rgba(255, 241, 223, 0.22), transparent 26%);
+      z-index: 1;
     }
 
-    .hero-shot .donut-left {
-      animation: donut-rock-left 8s ease-in-out infinite;
+    .hero-shot::after {
+      content: "";
+      position: absolute;
+      inset: auto 10% 8% auto;
+      width: 42%;
+      height: 26%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(34, 18, 10, 0.34), transparent 72%);
+      filter: blur(20px);
+      z-index: 0;
     }
 
-    .hero-shot .donut-right {
-      animation: donut-rock-right 7.2s ease-in-out infinite;
+    .hero-photo-caption {
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      z-index: 2;
+      display: grid;
+      gap: 8px;
+      padding: 22px 24px;
+      border-radius: 26px;
+      color: #fff9f2;
+      background: linear-gradient(180deg, rgba(64, 34, 20, 0.08), rgba(64, 34, 20, 0.52));
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(14px);
     }
 
-    .hero-shot .specular {
-      animation: shimmer 6s ease-in-out infinite;
+    .hero-photo-caption strong {
+      font-size: 1.26rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-photo-caption span {
+      color: rgba(255, 247, 237, 0.82);
+      font-size: 0.95rem;
+    }
+
+    .hero-inset {
+      position: absolute;
+      right: 28px;
+      top: 28px;
+      width: min(42%, 220px);
+      aspect-ratio: 0.92;
+      border-radius: 28px;
+      overflow: hidden;
+      z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      box-shadow: 0 24px 50px rgba(45, 23, 12, 0.22);
+      transform: rotate(7deg);
+    }
+
+    .hero-inset::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 36%),
+        linear-gradient(180deg, rgba(28, 14, 7, 0.06), rgba(28, 14, 7, 0.38));
+    }
+
+    .hero-inset img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.04);
     }
 
     .label-card,
@@ -599,6 +662,16 @@
       overflow: hidden;
     }
 
+    .story-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(255, 251, 246, 0.9), rgba(255, 247, 239, 0.84)),
+        url("assets/images/pastry-coffee.jpg") center/cover;
+      opacity: 0.5;
+    }
+
     .story-panel::after {
       content: "";
       position: absolute;
@@ -615,6 +688,13 @@
       max-width: 58ch;
     }
 
+    .story-panel .eyebrow,
+    .story-panel .section-title,
+    .story-copy {
+      position: relative;
+      z-index: 1;
+    }
+
     .story-copy p:last-child {
       margin-bottom: 0;
     }
@@ -623,6 +703,79 @@
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    .about-photo-card {
+      position: relative;
+      min-height: 300px;
+      grid-column: 1 / -1;
+      overflow: hidden;
+      padding: 0;
+      border-radius: 30px;
+      border: 1px solid rgba(139, 75, 45, 0.1);
+      box-shadow: 0 26px 54px rgba(63, 36, 21, 0.14);
+      background: #e7d5bf;
+    }
+
+    .about-photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.08) contrast(1.02);
+      transform: scale(1.03);
+      transition: transform 0.7s ease;
+    }
+
+    .about-photo-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .about-photo-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26, 13, 7, 0.04), rgba(26, 13, 7, 0.46)),
+        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.3), transparent 24%);
+    }
+
+    .about-photo-copy {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 24px;
+      z-index: 1;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 20px;
+      color: #fff9f2;
+    }
+
+    .about-photo-copy strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .about-photo-copy span {
+      max-width: 34ch;
+      color: rgba(255, 247, 237, 0.82);
+      font-size: 0.95rem;
+    }
+
+    .about-photo-tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(12px);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     .info-card {
@@ -674,7 +827,7 @@
 
     .menu-card {
       position: relative;
-      padding: 26px;
+      padding: 18px 18px 24px;
       border-radius: 28px;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(245, 233, 216, 0.94)),
@@ -722,19 +875,58 @@
       pointer-events: none;
     }
 
-    .drink-icon {
-      width: 72px;
-      height: 72px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 22px;
-      border-radius: 24px;
-      font-size: 1.9rem;
+    .menu-media {
+      position: relative;
+      height: 228px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      border-radius: 22px;
+      background: var(--bg-soft);
+      box-shadow: 0 18px 34px rgba(77, 40, 23, 0.12);
+    }
+
+    .menu-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+      transition: transform 0.7s ease, filter 0.7s ease;
+      filter: saturate(1.04) contrast(1.01);
+    }
+
+    .menu-card:hover .menu-media img {
+      transform: scale(1.08);
+      filter: saturate(1.12) contrast(1.03);
+    }
+
+    .menu-media::after {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 247, 237, 0.42));
+        linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%),
+        linear-gradient(180deg, rgba(49, 26, 15, 0), rgba(49, 26, 15, 0.22));
+    }
+
+    .drink-icon {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      z-index: 1;
+      width: auto;
+      height: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 1rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 247, 237, 0.7));
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.88),
-        0 12px 20px rgba(77, 40, 23, 0.08);
+        0 12px 20px rgba(77, 40, 23, 0.14);
       transition: transform 0.32s ease, box-shadow 0.32s ease;
     }
 
@@ -1225,7 +1417,7 @@
       }
 
       .hero-shot {
-        width: min(100%, 430px);
+        height: 100%;
       }
     }
 
@@ -1266,8 +1458,27 @@
         gap: 12px;
       }
 
+      .hero-inset {
+        position: relative;
+        inset: auto;
+        width: min(100%, 220px);
+        justify-self: end;
+      }
+
+      .hero-photo-caption,
+      .about-photo-copy {
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+      }
+
+      .about-photo-copy {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
       .hero-shot {
-        width: min(100%, 360px);
+        min-height: 360px;
       }
 
       .map-note {
@@ -1362,101 +1573,14 @@
         <div class="hero-visual reveal is-visible" aria-hidden="true">
           <div class="visual-card visual-main">
             <div class="hero-shot">
-              <svg viewBox="0 0 640 640" role="presentation" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <radialGradient id="tableGlow" cx="50%" cy="45%" r="50%">
-                    <stop offset="0%" stop-color="#fff7ef"/>
-                    <stop offset="100%" stop-color="#ebd0ad"/>
-                  </radialGradient>
-                  <linearGradient id="cupBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fffdfa"/>
-                    <stop offset="55%" stop-color="#f5e7d6"/>
-                    <stop offset="100%" stop-color="#e2c39d"/>
-                  </linearGradient>
-                  <linearGradient id="plateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fffefc"/>
-                    <stop offset="100%" stop-color="#ecd8bf"/>
-                  </linearGradient>
-                  <radialGradient id="coffeeGrad" cx="50%" cy="42%" r="56%">
-                    <stop offset="0%" stop-color="#875035"/>
-                    <stop offset="60%" stop-color="#5a2d1b"/>
-                    <stop offset="100%" stop-color="#412012"/>
-                  </radialGradient>
-                  <radialGradient id="foamGrad" cx="40%" cy="34%" r="56%">
-                    <stop offset="0%" stop-color="#fdf6ea"/>
-                    <stop offset="100%" stop-color="#ecd1af"/>
-                  </radialGradient>
-                  <linearGradient id="donutDough" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#f2ca8d"/>
-                    <stop offset="100%" stop-color="#b26f3f"/>
-                  </linearGradient>
-                  <linearGradient id="glazePink" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#f9d3c6"/>
-                    <stop offset="100%" stop-color="#e89983"/>
-                  </linearGradient>
-                  <linearGradient id="glazeCream" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#fff8ea"/>
-                    <stop offset="100%" stop-color="#f0d6ae"/>
-                  </linearGradient>
-                  <filter id="softShadow" x="-30%" y="-30%" width="160%" height="180%">
-                    <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#744029" flood-opacity="0.18"/>
-                  </filter>
-                  <filter id="smallShadow" x="-30%" y="-30%" width="160%" height="180%">
-                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#744029" flood-opacity="0.14"/>
-                  </filter>
-                </defs>
-
-                <ellipse cx="330" cy="518" rx="232" ry="76" fill="rgba(98,55,32,0.10)"/>
-                <ellipse cx="326" cy="474" rx="238" ry="96" fill="url(#tableGlow)" opacity="0.95"/>
-
-                <g class="steam-line" opacity="0.7">
-                  <path d="M298 126C282 105 287 78 307 60" stroke="rgba(255,255,255,0.72)" stroke-width="10" stroke-linecap="round" fill="none"/>
-                  <path d="M336 120C322 98 328 73 346 54" stroke="rgba(255,255,255,0.62)" stroke-width="10" stroke-linecap="round" fill="none"/>
-                  <path d="M374 130C360 108 368 82 386 65" stroke="rgba(255,255,255,0.56)" stroke-width="10" stroke-linecap="round" fill="none"/>
-                </g>
-
-                <g filter="url(#softShadow)">
-                  <ellipse cx="328" cy="392" rx="168" ry="46" fill="rgba(82,48,26,0.14)"/>
-                  <ellipse cx="328" cy="378" rx="170" ry="58" fill="url(#plateGrad)"/>
-                  <ellipse cx="328" cy="378" rx="126" ry="38" fill="rgba(236,216,191,0.72)"/>
-                </g>
-
-                <g filter="url(#softShadow)">
-                  <ellipse cx="320" cy="320" rx="122" ry="32" fill="rgba(82,48,26,0.14)"/>
-                  <path d="M214 224C214 204 228 190 248 190H392C412 190 426 204 426 224V320C426 374 381 418 320 418C259 418 214 374 214 320V224Z" fill="url(#cupBody)"/>
-                  <path d="M244 199H396C408 199 417 208 417 220V245H223V220C223 208 232 199 244 199Z" fill="rgba(255,255,255,0.88)"/>
-                  <ellipse cx="320" cy="220" rx="112" ry="34" fill="url(#coffeeGrad)"/>
-                  <ellipse cx="320" cy="220" rx="87" ry="24" fill="url(#foamGrad)"/>
-                  <path class="specular" d="M290 223C302 204 338 198 360 214C338 224 318 238 296 244C286 240 282 232 290 223Z" fill="rgba(255,255,255,0.38)"/>
-                  <path d="M415 236C459 238 484 264 484 300C484 337 459 361 425 362" fill="none" stroke="#f0ddc6" stroke-width="24" stroke-linecap="round"/>
-                  <path d="M423 246C455 248 470 268 470 298C470 327 455 345 431 348" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="8" stroke-linecap="round"/>
-                </g>
-
-                <g class="donut-left" filter="url(#smallShadow)">
-                  <ellipse cx="172" cy="398" rx="88" ry="34" fill="rgba(82,48,26,0.14)"/>
-                  <g transform="translate(172 370) rotate(-8)">
-                    <circle r="82" fill="url(#donutDough)"/>
-                    <circle r="34" fill="#f0dfcb"/>
-                    <path d="M-64-20C-50-54-12-72 26-64C56-58 78-38 78-10C78 22 58 42 34 54C4 70-38 70-60 50C-78 34-84 8-76-18C-72-30-68-20-64-20Z" fill="url(#glazePink)" opacity="0.96"/>
-                    <circle cx="-32" cy="-8" r="4.6" fill="#fff5ec"/>
-                    <circle cx="-6" cy="-32" r="4.2" fill="#fff5ec"/>
-                    <circle cx="28" cy="-18" r="4.4" fill="#fff5ec"/>
-                    <circle cx="44" cy="14" r="4.2" fill="#fff5ec"/>
-                    <circle cx="0" cy="32" r="4.4" fill="#fff5ec"/>
-                  </g>
-                </g>
-
-                <g class="donut-right" filter="url(#smallShadow)">
-                  <ellipse cx="478" cy="420" rx="86" ry="32" fill="rgba(82,48,26,0.13)"/>
-                  <g transform="translate(478 394) rotate(10)">
-                    <circle r="76" fill="url(#donutDough)"/>
-                    <circle r="28" fill="#eddac3"/>
-                    <path d="M-58-18C-46-48-12-66 22-60C52-54 70-36 70-10C70 18 54 36 32 48C4 62-34 62-54 44C-70 30-76 4-68-18Z" fill="url(#glazeCream)" opacity="0.98"/>
-                    <path d="M-18-24L-6-8L10-18L20-2L36-10" stroke="#c98746" stroke-width="6" stroke-linecap="round"/>
-                    <path d="M-28 18L-10 12L0 28L16 20L30 34" stroke="#c98746" stroke-width="6" stroke-linecap="round"/>
-                  </g>
-                </g>
-              </svg>
+              <img src="assets/images/hero-donut-coffee.jpg" alt="Пончик на белой тарелке и кофейный напиток на светлом столе">
+              <div class="hero-photo-caption">
+                <strong>Утренний сет с живой фактурой</strong>
+                <span>Сахарная пудра, мягкий свет и тот самый кадр, из-за которого хочется зайти прямо сейчас.</span>
+              </div>
+              <div class="hero-inset">
+                <img src="assets/images/espresso-tonic.jpg" alt="Холодный эспрессо-тоник в прозрачном стакане">
+              </div>
             </div>
           </div>
 
@@ -1495,6 +1619,17 @@
         </article>
 
         <div class="about-grid">
+          <article class="about-photo-card reveal" style="--delay: 1;">
+            <img src="assets/images/cafe-interior.jpg" alt="Солнечный интерьер specialty-кофейни с деревянной стойкой">
+            <div class="about-photo-copy">
+              <div>
+                <strong>Свет, дерево и тёплый ритм зала</strong>
+                <span>Интерьер теперь показывает атмосферу места, а не только рассказывает о ней текстом.</span>
+              </div>
+              <span class="about-photo-tag">Golden hour inside</span>
+            </div>
+          </article>
+
           <article class="info-card reveal" style="--delay: 1;">
             <h3>Specialty-подход</h3>
             <p>Работаем с отборным зерном и обжаркой под молочные и чёрные напитки, чтобы вкус был стабильным каждый день.</p>
@@ -1530,7 +1665,10 @@
 
         <div class="menu-grid">
           <article class="menu-card reveal" style="--delay: 0;">
-            <div class="drink-icon">☕</div>
+            <div class="menu-media">
+              <img src="assets/images/pastry-coffee.jpg" alt="Чашка кофе и выпечка на тарелке">
+              <div class="drink-icon">☕ Классика</div>
+            </div>
             <h3>Капучино «Крем-брюле»</h3>
             <p>Нежный молочный напиток с натуральной карамельной сладостью и бархатной пеной.</p>
             <div class="drink-meta">
@@ -1540,7 +1678,10 @@
           </article>
 
           <article class="menu-card reveal" style="--delay: 1;">
-            <div class="drink-icon">🧊</div>
+            <div class="menu-media">
+              <img src="assets/images/espresso-tonic.jpg" alt="Эспрессо-тоник с апельсиновым акцентом в прозрачном стакане">
+              <div class="drink-icon">🧊 Цитрус</div>
+            </div>
             <h3>Эспрессо-тоник с апельсином</h3>
             <p>Яркая цитрусовая кислотность, тоник и холодный эспрессо для бодрого городского утра.</p>
             <div class="drink-meta">
@@ -1550,7 +1691,10 @@
           </article>
 
           <article class="menu-card reveal" style="--delay: 2;">
-            <div class="drink-icon">🍩</div>
+            <div class="menu-media">
+              <img src="assets/images/hero-donut-coffee.jpg" alt="Пышный пончик на тарелке рядом с кофейным напитком">
+              <div class="drink-icon">🍩 Дуэт</div>
+            </div>
             <h3>Латте «Солёная карамель»</h3>
             <p>Сбалансированный сладко-солёный профиль, который идеально сочетается с классическим пончиком.</p>
             <div class="drink-meta">
@@ -1560,7 +1704,10 @@
           </article>
 
           <article class="menu-card reveal" style="--delay: 3;">
-            <div class="drink-icon">🍫</div>
+            <div class="menu-media">
+              <img src="assets/images/pastry-coffee.jpg" alt="Тёплая чашка кофе и десерт на сервировке">
+              <div class="drink-icon">🍫 Cocoa</div>
+            </div>
             <h3>Мокко с какао-нибсами</h3>
             <p>Глубокий шоколадный вкус, насыщенный эспрессо и лёгкая текстура сливок сверху.</p>
             <div class="drink-meta">
@@ -1570,7 +1717,10 @@
           </article>
 
           <article class="menu-card reveal" style="--delay: 4;">
-            <div class="drink-icon">🌰</div>
+            <div class="menu-media">
+              <img src="assets/images/cafe-interior.jpg" alt="Зона бара в кофейне с тёплым солнечным светом">
+              <div class="drink-icon">🌰 Roast</div>
+            </div>
             <h3>Флэт уайт «Пралине»</h3>
             <p>Плотное тело, ореховые ноты и сладкое послевкусие, собранное вокруг яркого эспрессо.</p>
             <div class="drink-meta">
@@ -1580,7 +1730,10 @@
           </article>
 
           <article class="menu-card reveal" style="--delay: 5;">
-            <div class="drink-icon">❄️</div>
+            <div class="menu-media">
+              <img src="assets/images/espresso-tonic.jpg" alt="Холодный кофейный напиток крупным планом">
+              <div class="drink-icon">❄️ Cold</div>
+            </div>
             <h3>Колд брю с ванильным кремом</h3>
             <p>Холодная экстракция, шелковистый крем сверху и чистый вкус какао-бобов и тростникового сахара.</p>
             <div class="drink-meta">
