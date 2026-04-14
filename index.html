@@ -3,16 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Три пончика и чашка кофе</title>
+  <title>Два пончика и чашка кофе</title>
   <meta
     name="description"
     content="Современная лендинг-страница специализированной кофейни «Два пончика и чашка кофе» с историей, меню и контактами."
+  >
+  <meta name="theme-color" content="#f7efe6">
+  <link
+    rel="icon"
+    href='data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"%3E%3Ctext x="50%25" y="54%25" dominant-baseline="middle" text-anchor="middle" font-size="46"%3E%E2%98%95%3C/text%3E%3C/svg%3E'
   >
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap"
     rel="stylesheet"
+  >
+  <link
+    rel="preload"
+    as="image"
+    href="assets/images/optimized/hero-donut-coffee-1600.avif"
+    imagesrcset="assets/images/optimized/hero-donut-coffee-960.avif 960w, assets/images/optimized/hero-donut-coffee-1600.avif 1600w"
+    imagesizes="(max-width: 760px) 100vw, 44vw"
+    type="image/avif"
   >
   <style>
     :root {
@@ -36,6 +49,8 @@
       --radius-lg: 22px;
       --radius-md: 18px;
       --container: 1180px;
+      --scroll-progress: 0;
+      --hero-shift: 0px;
     }
 
     * {
@@ -92,6 +107,10 @@
       display: block;
     }
 
+    picture {
+      display: block;
+    }
+
     a {
       color: inherit;
       text-decoration: none;
@@ -136,6 +155,20 @@
     .section {
       padding: 96px 0;
       position: relative;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 180;
+      width: 100%;
+      height: 4px;
+      transform-origin: left center;
+      transform: scaleX(var(--scroll-progress));
+      background: linear-gradient(90deg, #8f5435 0%, #d89c66 55%, #f2d1ab 100%);
+      box-shadow: 0 10px 24px rgba(109, 52, 29, 0.2);
+      pointer-events: none;
     }
 
     .section-title {
@@ -263,6 +296,7 @@
     }
 
     .nav a:hover,
+    .nav a.is-active,
     .nav a:focus-visible {
       color: var(--accent-strong);
       background: rgba(255, 255, 255, 0.84);
@@ -455,7 +489,7 @@
         radial-gradient(circle at top, rgba(255, 255, 255, 0.22), transparent 34%),
         linear-gradient(180deg, rgba(255, 252, 247, 0.24), rgba(239, 220, 195, 0.08));
       transform:
-        translate3d(0, 0, 0)
+        translate3d(0, var(--hero-shift), 0)
         rotateX(var(--tilt-x, 0deg))
         rotateY(var(--tilt-y, 0deg));
       transition: transform 0.35s ease;
@@ -495,14 +529,15 @@
       height: 100%;
       display: block;
       object-fit: cover;
-      filter: saturate(1.08) contrast(1.03);
-      transform: scale(1.03);
+      object-position: center 42%;
+      filter: saturate(1.03) contrast(1.02) brightness(1.01);
+      transform: scale(1.015);
       transition: transform 0.7s ease, filter 0.7s ease;
     }
 
     .hero-visual:hover .hero-shot img {
-      transform: scale(1.08);
-      filter: saturate(1.14) contrast(1.05);
+      transform: scale(1.045);
+      filter: saturate(1.08) contrast(1.03) brightness(1.02);
     }
 
     .hero-shot::before {
@@ -510,9 +545,9 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(41, 21, 11, 0.02) 0%, rgba(41, 21, 11, 0.18) 42%, rgba(41, 21, 11, 0.62) 100%),
+        linear-gradient(180deg, rgba(41, 21, 11, 0.02) 0%, rgba(41, 21, 11, 0.12) 42%, rgba(41, 21, 11, 0.48) 100%),
         linear-gradient(120deg, rgba(255, 255, 255, 0.28) 0%, transparent 32%),
-        radial-gradient(circle at 18% 20%, rgba(255, 241, 223, 0.22), transparent 26%);
+        radial-gradient(circle at 18% 20%, rgba(255, 241, 223, 0.18), transparent 26%);
       z-index: 1;
     }
 
@@ -581,7 +616,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.04);
+      object-position: center 62%;
+      transform: scale(1.02);
     }
 
     .label-card,
@@ -721,13 +757,14 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: saturate(1.08) contrast(1.02);
-      transform: scale(1.03);
+      object-position: center 44%;
+      filter: saturate(1.04) contrast(1.02);
+      transform: scale(1.02);
       transition: transform 0.7s ease;
     }
 
     .about-photo-card:hover img {
-      transform: scale(1.08);
+      transform: scale(1.05);
     }
 
     .about-photo-card::after {
@@ -735,8 +772,8 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(26, 13, 7, 0.04), rgba(26, 13, 7, 0.46)),
-        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.3), transparent 24%);
+        linear-gradient(180deg, rgba(26, 13, 7, 0.04), rgba(26, 13, 7, 0.38)),
+        radial-gradient(circle at 18% 24%, rgba(255, 255, 255, 0.24), transparent 24%);
     }
 
     .about-photo-copy {
@@ -889,14 +926,14 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.02);
+      transform: scale(1.01);
       transition: transform 0.7s ease, filter 0.7s ease;
-      filter: saturate(1.04) contrast(1.01);
+      filter: saturate(1.02) contrast(1.02);
     }
 
     .menu-card:hover .menu-media img {
-      transform: scale(1.08);
-      filter: saturate(1.12) contrast(1.03);
+      transform: scale(1.05);
+      filter: saturate(1.07) contrast(1.03);
     }
 
     .menu-media::after {
@@ -905,7 +942,33 @@
       inset: 0;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%),
-        linear-gradient(180deg, rgba(49, 26, 15, 0), rgba(49, 26, 15, 0.22));
+        linear-gradient(180deg, rgba(49, 26, 15, 0), rgba(49, 26, 15, 0.14));
+    }
+
+    .menu-card--brulee .menu-media::after,
+    .menu-card--mokko .menu-media::after {
+      background:
+        linear-gradient(180deg, rgba(255, 250, 244, 0.08), transparent 26%),
+        linear-gradient(180deg, rgba(57, 31, 17, 0), rgba(57, 31, 17, 0.22));
+    }
+
+    .menu-card--citrus .menu-media::after,
+    .menu-card--coldbrew .menu-media::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 26%),
+        linear-gradient(180deg, rgba(18, 41, 37, 0), rgba(18, 41, 37, 0.24));
+    }
+
+    .menu-card--caramel .menu-media::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 26%),
+        linear-gradient(180deg, rgba(81, 46, 26, 0), rgba(81, 46, 26, 0.18));
+    }
+
+    .menu-card--praline .menu-media::after {
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 20%),
+        linear-gradient(180deg, rgba(30, 23, 18, 0), rgba(30, 23, 18, 0.18));
     }
 
     .drink-icon {
@@ -1056,75 +1119,59 @@
       pointer-events: none;
     }
 
-    .map-art {
+    .map-frame {
       position: relative;
       min-height: 280px;
       border-radius: 24px;
       overflow: hidden;
+      background: linear-gradient(135deg, rgba(255, 243, 226, 0.9), rgba(233, 204, 165, 0.75));
+      box-shadow: 0 24px 44px rgba(77, 40, 23, 0.12);
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 280px;
+      border: 0;
+      display: block;
+      filter: saturate(0.86) sepia(0.08) contrast(0.96);
+    }
+
+    .map-frame::after {
+      content: "";
+      position: absolute;
+      inset: 0;
       background:
-        linear-gradient(135deg, rgba(255, 243, 226, 0.9), rgba(233, 204, 165, 0.75)),
-        repeating-linear-gradient(
-          0deg,
-          rgba(139, 75, 45, 0.08) 0 2px,
-          transparent 2px 50px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          rgba(139, 75, 45, 0.08) 0 2px,
-          transparent 2px 50px
-        );
+        linear-gradient(180deg, rgba(255, 252, 247, 0.04), rgba(71, 37, 20, 0.06)),
+        radial-gradient(circle at 16% 16%, rgba(255, 255, 255, 0.18), transparent 18%);
+      pointer-events: none;
     }
 
-    .map-road {
+    .map-badge {
       position: absolute;
-      background: rgba(255, 255, 255, 0.82);
-      border-radius: 999px;
-      box-shadow: inset 0 0 0 1px rgba(139, 75, 45, 0.06);
+      left: 18px;
+      top: 18px;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255, 252, 247, 0.9);
+      border: 1px solid rgba(139, 75, 45, 0.12);
+      box-shadow: 0 18px 28px rgba(77, 40, 23, 0.12);
+      backdrop-filter: blur(12px);
     }
 
-    .map-road.one {
-      width: 84%;
-      height: 18px;
-      top: 64px;
-      left: 8%;
-      transform: rotate(-7deg);
+    .map-badge strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 0.95rem;
     }
 
-    .map-road.two {
-      width: 18px;
-      height: 82%;
-      top: 9%;
-      left: 58%;
-      transform: rotate(6deg);
-    }
-
-    .map-road.three {
-      width: 62%;
-      height: 14px;
-      bottom: 72px;
-      left: 16%;
-      transform: rotate(9deg);
-    }
-
-    .pin {
-      position: absolute;
-      top: 44%;
-      left: 55%;
-      width: 72px;
-      height: 72px;
-      display: grid;
-      place-items: center;
-      border-radius: 50% 50% 50% 0;
-      transform: translate(-50%, -50%) rotate(-45deg);
-      background: linear-gradient(135deg, #c76f47, var(--accent-strong));
-      box-shadow: 0 24px 34px rgba(109, 52, 29, 0.26);
-      animation: bob 3.2s ease-in-out infinite;
-    }
-
-    .pin::before {
-      content: "☕";
-      font-size: 1.45rem;
-      transform: rotate(45deg);
+    .map-badge span {
+      color: var(--muted);
+      font-size: 0.82rem;
     }
 
     .map-note {
@@ -1170,6 +1217,13 @@
     .map-note span {
       color: var(--muted);
       font-size: 0.95rem;
+    }
+
+    .map-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
     .site-footer {
@@ -1273,16 +1327,6 @@
       50% {
         opacity: 0.85;
         transform: translateY(-10px);
-      }
-    }
-
-    @keyframes bob {
-      0%,
-      100% {
-        transform: translate(-50%, -50%) rotate(-45deg);
-      }
-      50% {
-        transform: translate(-50%, -56%) rotate(-45deg);
       }
     }
 
@@ -1486,6 +1530,10 @@
         align-items: flex-start;
       }
 
+      .map-actions {
+        width: 100%;
+      }
+
       .hero-grid,
       .panel,
       .contact-card,
@@ -1514,6 +1562,7 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"></div>
   <div class="ambient-orb one" aria-hidden="true"></div>
   <div class="ambient-orb two" aria-hidden="true"></div>
   <header class="site-header">
@@ -1573,13 +1622,44 @@
         <div class="hero-visual reveal is-visible" aria-hidden="true">
           <div class="visual-card visual-main">
             <div class="hero-shot">
-              <img src="assets/images/hero-donut-coffee.jpg" alt="Пончик на белой тарелке и кофейный напиток на светлом столе">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/hero-donut-coffee-960.avif 960w, assets/images/optimized/hero-donut-coffee-1600.avif 1600w"
+                  sizes="(max-width: 760px) 100vw, 44vw"
+                >
+                <img
+                  src="assets/images/optimized/hero-donut-coffee-960.jpg"
+                  srcset="assets/images/optimized/hero-donut-coffee-960.jpg 960w, assets/images/hero-donut-coffee.jpg 1600w"
+                  sizes="(max-width: 760px) 100vw, 44vw"
+                  width="1600"
+                  height="2133"
+                  alt="Пончик на белой тарелке и кофейный напиток на светлом столе"
+                  decoding="async"
+                  fetchpriority="high"
+                >
+              </picture>
               <div class="hero-photo-caption">
                 <strong>Утренний сет с живой фактурой</strong>
                 <span>Сахарная пудра, мягкий свет и тот самый кадр, из-за которого хочется зайти прямо сейчас.</span>
               </div>
               <div class="hero-inset">
-                <img src="assets/images/espresso-tonic.jpg" alt="Холодный эспрессо-тоник в прозрачном стакане">
+                <picture>
+                  <source
+                    type="image/avif"
+                    srcset="assets/images/optimized/espresso-tonic-960.avif 960w, assets/images/optimized/espresso-tonic-1600.avif 1600w"
+                    sizes="(max-width: 480px) 58vw, 18vw"
+                  >
+                  <img
+                    src="assets/images/optimized/espresso-tonic-960.jpg"
+                    srcset="assets/images/optimized/espresso-tonic-960.jpg 960w, assets/images/espresso-tonic.jpg 1600w"
+                    sizes="(max-width: 480px) 58vw, 18vw"
+                    width="1600"
+                    height="1600"
+                    alt="Холодный эспрессо-тоник в прозрачном стакане"
+                    decoding="async"
+                  >
+                </picture>
               </div>
             </div>
           </div>
@@ -1620,7 +1700,23 @@
 
         <div class="about-grid">
           <article class="about-photo-card reveal" style="--delay: 1;">
-            <img src="assets/images/cafe-interior.jpg" alt="Солнечный интерьер specialty-кофейни с деревянной стойкой">
+            <picture>
+              <source
+                type="image/avif"
+                srcset="assets/images/optimized/cafe-interior-960.avif 960w, assets/images/optimized/cafe-interior-1600.avif 1600w"
+                sizes="(max-width: 1080px) 100vw, 50vw"
+              >
+              <img
+                src="assets/images/optimized/cafe-interior-960.jpg"
+                srcset="assets/images/optimized/cafe-interior-960.jpg 960w, assets/images/cafe-interior.jpg 1600w"
+                sizes="(max-width: 1080px) 100vw, 50vw"
+                width="1600"
+                height="2135"
+                alt="Солнечный интерьер specialty-кофейни с деревянной стойкой"
+                loading="lazy"
+                decoding="async"
+              >
+            </picture>
             <div class="about-photo-copy">
               <div>
                 <strong>Свет, дерево и тёплый ритм зала</strong>
@@ -1664,9 +1760,25 @@
         </div>
 
         <div class="menu-grid">
-          <article class="menu-card reveal" style="--delay: 0;">
+          <article class="menu-card menu-card--brulee reveal" style="--delay: 0;">
             <div class="menu-media">
-              <img src="assets/images/pastry-coffee.jpg" alt="Чашка кофе и выпечка на тарелке">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/cappuccino-brulee-720.avif 720w, assets/images/optimized/menu/cappuccino-brulee-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/cappuccino-brulee-720.jpg"
+                  srcset="assets/images/optimized/menu/cappuccino-brulee-720.jpg 720w, assets/images/optimized/menu/cappuccino-brulee-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Чашка кофе и выпечка на тарелке"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">☕ Классика</div>
             </div>
             <h3>Капучино «Крем-брюле»</h3>
@@ -1677,9 +1789,25 @@
             </div>
           </article>
 
-          <article class="menu-card reveal" style="--delay: 1;">
+          <article class="menu-card menu-card--citrus reveal" style="--delay: 1;">
             <div class="menu-media">
-              <img src="assets/images/espresso-tonic.jpg" alt="Эспрессо-тоник с апельсиновым акцентом в прозрачном стакане">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/espresso-tonic-orange-720.avif 720w, assets/images/optimized/menu/espresso-tonic-orange-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/espresso-tonic-orange-720.jpg"
+                  srcset="assets/images/optimized/menu/espresso-tonic-orange-720.jpg 720w, assets/images/optimized/menu/espresso-tonic-orange-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Эспрессо-тоник с апельсиновым акцентом в прозрачном стакане"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">🧊 Цитрус</div>
             </div>
             <h3>Эспрессо-тоник с апельсином</h3>
@@ -1690,9 +1818,25 @@
             </div>
           </article>
 
-          <article class="menu-card reveal" style="--delay: 2;">
+          <article class="menu-card menu-card--caramel reveal" style="--delay: 2;">
             <div class="menu-media">
-              <img src="assets/images/hero-donut-coffee.jpg" alt="Пышный пончик на тарелке рядом с кофейным напитком">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/latte-salted-caramel-720.avif 720w, assets/images/optimized/menu/latte-salted-caramel-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/latte-salted-caramel-720.jpg"
+                  srcset="assets/images/optimized/menu/latte-salted-caramel-720.jpg 720w, assets/images/optimized/menu/latte-salted-caramel-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Пышный пончик на тарелке рядом с кофейным напитком"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">🍩 Дуэт</div>
             </div>
             <h3>Латте «Солёная карамель»</h3>
@@ -1703,9 +1847,25 @@
             </div>
           </article>
 
-          <article class="menu-card reveal" style="--delay: 3;">
+          <article class="menu-card menu-card--mokko reveal" style="--delay: 3;">
             <div class="menu-media">
-              <img src="assets/images/pastry-coffee.jpg" alt="Тёплая чашка кофе и десерт на сервировке">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/mokko-cocoa-nibs-720.avif 720w, assets/images/optimized/menu/mokko-cocoa-nibs-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/mokko-cocoa-nibs-720.jpg"
+                  srcset="assets/images/optimized/menu/mokko-cocoa-nibs-720.jpg 720w, assets/images/optimized/menu/mokko-cocoa-nibs-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Тёплая чашка кофе и десерт на сервировке"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">🍫 Cocoa</div>
             </div>
             <h3>Мокко с какао-нибсами</h3>
@@ -1716,9 +1876,25 @@
             </div>
           </article>
 
-          <article class="menu-card reveal" style="--delay: 4;">
+          <article class="menu-card menu-card--praline reveal" style="--delay: 4;">
             <div class="menu-media">
-              <img src="assets/images/cafe-interior.jpg" alt="Зона бара в кофейне с тёплым солнечным светом">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/flat-white-praline-720.avif 720w, assets/images/optimized/menu/flat-white-praline-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/flat-white-praline-720.jpg"
+                  srcset="assets/images/optimized/menu/flat-white-praline-720.jpg 720w, assets/images/optimized/menu/flat-white-praline-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Зона бара в кофейне с тёплым солнечным светом"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">🌰 Roast</div>
             </div>
             <h3>Флэт уайт «Пралине»</h3>
@@ -1729,9 +1905,25 @@
             </div>
           </article>
 
-          <article class="menu-card reveal" style="--delay: 5;">
+          <article class="menu-card menu-card--coldbrew reveal" style="--delay: 5;">
             <div class="menu-media">
-              <img src="assets/images/espresso-tonic.jpg" alt="Холодный кофейный напиток крупным планом">
+              <picture>
+                <source
+                  type="image/avif"
+                  srcset="assets/images/optimized/menu/cold-brew-vanilla-720.avif 720w, assets/images/optimized/menu/cold-brew-vanilla-1200.avif 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                >
+                <img
+                  src="assets/images/optimized/menu/cold-brew-vanilla-720.jpg"
+                  srcset="assets/images/optimized/menu/cold-brew-vanilla-720.jpg 720w, assets/images/optimized/menu/cold-brew-vanilla-1200.jpg 1200w"
+                  sizes="(max-width: 760px) 100vw, (max-width: 1080px) 50vw, 33vw"
+                  width="1200"
+                  height="900"
+                  alt="Холодный кофейный напиток крупным планом"
+                  loading="lazy"
+                  decoding="async"
+                >
+              </picture>
               <div class="drink-icon">❄️ Cold</div>
             </div>
             <h3>Колд брю с ванильным кремом</h3>
@@ -1773,18 +1965,34 @@
 
         <article class="map-panel reveal" style="--delay: 1;">
           <span class="eyebrow">Где мы</span>
-          <div class="map-art" aria-hidden="true">
-            <div class="map-road one"></div>
-            <div class="map-road two"></div>
-            <div class="map-road three"></div>
-            <div class="pin"></div>
+          <div class="map-frame">
+            <div class="map-badge">
+              <div>
+                <strong>Большая Дмитровка, 18</strong>
+                <span>5 минут от метро «Театральная»</span>
+              </div>
+            </div>
+            <iframe
+              title="Карта с адресом кофейни"
+              src="https://www.google.com/maps?q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%2C%2018&z=16&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
           <div class="map-note">
             <div>
               <strong>Пять минут пешком от центра</strong>
               <span>Удобно зайти утром, встретиться днём или захватить кофе перед вечерней прогулкой.</span>
             </div>
-            <a class="button button-secondary" href="#hero">Наверх</a>
+            <div class="map-actions">
+              <a
+                class="button button-secondary"
+                href="https://www.google.com/maps/search/?api=1&query=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D1%83%D0%BB.%20%D0%91%D0%BE%D0%BB%D1%8C%D1%88%D0%B0%D1%8F%20%D0%94%D0%BC%D0%B8%D1%82%D1%80%D0%BE%D0%B2%D0%BA%D0%B0%2C%2018"
+                target="_blank"
+                rel="noreferrer"
+              >Открыть карту</a>
+              <a class="button button-secondary" href="#hero">Наверх</a>
+            </div>
           </div>
         </article>
       </div>
@@ -1799,6 +2007,8 @@
   </footer>
   <script>
     const revealItems = document.querySelectorAll(".reveal:not(.is-visible)");
+    const navLinks = [...document.querySelectorAll('.nav a[href^="#"]')];
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
     if (revealItems.length) {
       const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -1821,7 +2031,7 @@
     const heroVisual = document.querySelector(".hero-visual");
     const heroMain = document.querySelector(".visual-main");
 
-    if (heroVisual && heroMain && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (heroVisual && heroMain && !prefersReducedMotion.matches) {
       heroVisual.addEventListener("mousemove", (event) => {
         const rect = heroVisual.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
@@ -1835,6 +2045,67 @@
         heroMain.style.setProperty("--tilt-x", "0deg");
         heroMain.style.setProperty("--tilt-y", "0deg");
       });
+    }
+
+    if (!prefersReducedMotion.matches) {
+      let isTicking = false;
+
+      const syncScrollEffects = () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+
+        document.documentElement.style.setProperty("--scroll-progress", progress.toFixed(3));
+
+        if (heroMain) {
+          heroMain.style.setProperty("--hero-shift", `${Math.min(window.scrollY * 0.08, 26)}px`);
+        }
+
+        isTicking = false;
+      };
+
+      const requestScrollSync = () => {
+        if (isTicking) {
+          return;
+        }
+
+        isTicking = true;
+        window.requestAnimationFrame(syncScrollEffects);
+      };
+
+      syncScrollEffects();
+      window.addEventListener("scroll", requestScrollSync, { passive: true });
+      window.addEventListener("resize", requestScrollSync);
+    }
+
+    const sectionMap = new Map();
+
+    navLinks.forEach((link) => {
+      const section = document.querySelector(link.getAttribute("href"));
+
+      if (section) {
+        sectionMap.set(section.id, section);
+      }
+    });
+
+    if (sectionMap.size) {
+      const navObserver = new IntersectionObserver((entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        if (!visibleEntry) {
+          return;
+        }
+
+        navLinks.forEach((link) => {
+          link.classList.toggle("is-active", link.getAttribute("href") === `#${visibleEntry.target.id}`);
+        });
+      }, {
+        threshold: [0.32, 0.5, 0.72],
+        rootMargin: "-18% 0px -42% 0px"
+      });
+
+      sectionMap.forEach((section) => navObserver.observe(section));
     }
   </script>
 </body>
